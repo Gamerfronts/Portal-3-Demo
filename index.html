@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portal 3 on Steam</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#1b2838;
+color:#c7d5e0;
+}
+/* animated aperture background */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:url("https://upload.wikimedia.org/wikipedia/commons/2/26/Aperture_Science_logo.svg");
+background-size:400px;
+opacity:0.02;
+animation:spin 120s linear infinite;
+pointer-events:none;
+}
+@keyframes spin{
+from{transform:rotate(0deg)}
+to{transform:rotate(360deg)}
+}
+/* STEAM HEADER */
+.header{
+background:#171a21;
+height:70px;
+display:flex;
+align-items:center;
+padding:0 40px;
+}
+.logo{
+display:flex;
+align-items:center;
+font-size:22px;
+font-weight:bold;
+color:white;
+}
+.logo img{
+width:34px;
+margin-right:10px;
+}
+.nav{
+margin-left:40px;
+}
+.nav a{
+color:#c7d5e0;
+margin-right:18px;
+text-decoration:none;
+font-size:14px;
+}
+.nav a:hover{
+color:white;
+}
+.install{
+margin-left:auto;
+background:#5c7e10;
+color:white;
+padding:8px 14px;
+border-radius:3px;
+font-size:13px;
+cursor:pointer;
+text-decoration:none;
+}
+/* STORE TABS */
+.tabs{
+background:#2a475e;
+padding:10px 40px;
+}
+.tabs a{
+color:#c7d5e0;
+margin-right:20px;
+text-decoration:none;
+font-size:14px;
+}
+.tabs a:hover{
+color:white;
+}
+/* HERO */
+.hero{
+height:380px;
+background:url("https://vgleaks.com/wp-content/uploads/2013/10/portal3.jpg") center/cover;
+display:flex;
+align-items:flex-end;
+padding:40px;
+}
+.herotitle{
+font-size:42px;
+font-weight:bold;
+animation:portalGlow 3s infinite alternate;
+}
+@keyframes portalGlow{
+from{ text-shadow:0 0 10px #00bfff;}
+to{ text-shadow:0 0 20px #ff7a00;}
+}
+/* PAGE */
+.container{
+width:1150px;
+margin:auto;
+padding:30px;
+}
+.main{
+display:flex;
+gap:30px;
+}
+/* CAROUSEL */
+.carousel{
+flex:2;
+}
+.carousel img{
+width:100%;
+border-radius:4px;
+}
+.thumbs{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+.thumbs img{
+width:120px;
+cursor:pointer;
+opacity:0.7;
+border-radius:3px;
+}
+.thumbs img:hover{
+opacity:1;
+}
+/* SIDEBAR */
+.sidebar{
+flex:1;
+background:#16202d;
+padding:20px;
+border-radius:4px;
+}
+.review{
+color:#66c0f4;
+font-weight:bold;
+margin-bottom:10px;
+}
+.tag{
+display:inline-block;
+background:#2a475e;
+padding:6px 10px;
+margin:3px;
+font-size:12px;
+border-radius:3px;
+}
+/* BUY */
+.buybox{
+margin-top:20px;
+background:#2a475e;
+padding:15px;
+border-radius:4px;
+}
+.price{
+font-size:20px;
+margin-bottom:10px;
+}
+.buybtn{
+width:100%;
+padding:12px;
+background:#5c7e10;
+color:white;
+border:none;
+font-size:16px;
+cursor:pointer;
+}
+.buybtn:hover{
+background:#6fa720;
+}
+.wishlist{
+margin-top:10px;
+background:#2a475e;
+padding:10px;
+text-align:center;
+cursor:pointer;
+}
+/* PLAYER COUNT */
+.players{
+margin-top:15px;
+color:#a4d007;
+font-weight:bold;
+}
+/* DESCRIPTION */
+.desc{
+margin-top:40px;
+line-height:1.6;
+}
+/* REVIEWS */
+.userreviews{
+margin-top:40px;
+}
+.reviewbox{
+background:#16202d;
+padding:15px;
+margin-bottom:15px;
+border-radius:4px;
+}
+.username{
+color:#66c0f4;
+font-weight:bold;
+}
+/* ACHIEVEMENTS */
+.achievements{
+margin-top:40px;
+background:#16202d;
+padding:20px;
+border-radius:4px;
+}
+.achievement{
+margin-bottom:10px;
+}
+/* NEWS */
+.news{
+margin-top:40px;
+}
+.newspost{
+background:#16202d;
+padding:15px;
+margin-bottom:15px;
+border-radius:4px;
+}
+/* RECOMMENDED */
+.recommended{
+margin-top:40px;
+}
+.recgrid{
+display:flex;
+gap:20px;
+}
+.rec{
+background:#16202d;
+padding:10px;
+border-radius:4px;
+width:32%;
+}
+.rec img{
+width:100%;
+border-radius:4px;
+}
+/* SPECS */
+.specs{
+background:#16202d;
+padding:20px;
+margin-top:30px;
+border-radius:4px;
+}
+/* POPUP */
+.popup{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#2a475e;
+padding:15px 20px;
+border-radius:4px;
+box-shadow:0 0 10px black;
+}
+/* FOOTER */
+.footer{
+margin-top:60px;
+background:#171a21;
+padding:20px;
+text-align:center;
+color:#8f98a0;
+}
+/* PORTAL DEMO */
+#portalGame{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+z-index:9999;
+text-align:center;
+}
+#portalGame canvas{
+margin-top:80px;
+border:3px solid #444;
+background:#111;
+}
+.backbtn{
+position:absolute;
+top:20px;
+left:20px;
+background:#2a475e;
+padding:10px 15px;
+cursor:pointer;
+color:white;
+}
+</style>
+
+<script>
+/* Screenshot switcher */
+function swap(img){
+document.getElementById("mainshot").src = img.src
+}
+/* Fake cart */
+function cart(){
+alert("Portal 3 added to cart (concept demo).")
+}
+function wishlist(){
+alert("Added to wishlist (concept demo).")
+}
+/* Fake player counter */
+function updatePlayers(){
+let base = 14253
+setInterval(function(){
+let change = Math.floor(Math.random()*200)
+document.getElementById("players").innerText =
+(base + change) + " players online"
+},3000)
+}
+window.onload = updatePlayers
+
+/* PLAY DEMO */
+function playDemo(){
+document.getElementById("portalGame").style.display="block";
+initGame();
+}
+function exitDemo(){
+document.getElementById("portalGame").style.display="none";
+}
+
+/* SIMPLE PORTAL DEMO */
+let gameInterval;
+function initGame(){
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+let player={x:450,y:250,w:20,h:20,dx:0,dy:0};
+let portals=[];
+let keys={};
+document.addEventListener("keydown",e=>keys[e.key.toLowerCase()]=true);
+document.addEventListener("keyup",e=>keys[e.key.toLowerCase()]=false);
+canvas.addEventListener("click",e=>{
+let rect=canvas.getBoundingClientRect();
+portals.push({x:e.clientX-rect.left-10,y:e.clientY-rect.top-10,w:20,h:20,color:"#00bfff"});
+});
+function update(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+// move player
+if(keys["w"])player.y-=3;
+if(keys["s"])player.y+=3;
+if(keys["a"])player.x-=3;
+if(keys["d"])player.x+=3;
+// draw player
+ctx.fillStyle="#ff7a00";
+ctx.fillRect(player.x,player.y,player.w,player.h);
+// draw portals
+for(let p of portals){
+ctx.fillStyle=p.color;
+ctx.fillRect(p.x,p.y,p.w,p.h);
+}
+}
+gameInterval=setInterval(update,30);
+}
+
+/* stop demo when exit */
+document.getElementById("portalGame")?.addEventListener("remove",()=>{
+clearInterval(gameInterval);
+});
+
+/* FAKE CREDITS */
+function showCredits(){
+exitDemo();
+alert("Portal 3 Demo\n\nCreated by Aperture Science (Fan Project)\nThanks for testing the chamber!\n\nGLaDOS approves.");
+}
+</script>
+
+</head>
+<body>
+
+<div class="header">
+<div class="logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg">
+STEAM
+</div>
+<div class="nav">
+<a href="https://store.steampowered.com/">STORE</a>
+<a href="https://steamcommunity.com/">COMMUNITY</a>
+<a href="https://store.steampowered.com/app/620/Portal_2/">PORTAL 2</a>
+<a href="https://help.steampowered.com/">SUPPORT</a>
+</div>
+<a class="install" href="https://store.steampowered.com/about/">
+Install Steam
+</a>
+</div>
+
+<div class="tabs">
+<a href="#">Overview</a>
+<a href="#">Reviews</a>
+<a href="#">Discussions</a>
+<a href="#">Workshop</a>
+</div>
+
+<div class="hero">
+<div class="herotitle">Portal 3</div>
+</div>
+
+<div class="container">
+<div class="main">
+<div class="carousel">
+<img id="mainshot" src="https://vgleaks.com/wp-content/uploads/2013/10/portal3.jpg">
+<div class="thumbs">
+<img onclick="swap(this)" src="https://vgleaks.com/wp-content/uploads/2013/10/portal3.jpg">
+<img onclick="swap(this)" src="https://vgleaks.com/wp-content/uploads/2013/10/portal3.jpg">
+<img onclick="swap(this)" src="https://vgleaks.com/wp-content/uploads/2013/10/portal3.jpg">
+</div>
+</div>
+
+<div class="sidebar">
+<div class="review">
+Very Positive (94%)
+</div>
+<div>
+<span class="tag">Puzzle</span>
+<span class="tag">Sci-Fi</span>
+<span class="tag">Singleplayer</span>
+<span class="tag">Co-op</span>
+<span class="tag">First-Person</span>
+</div>
+
+<div class="buybox">
+<div class="price">$39.99</div>
+<button class="buybtn" onclick="cart()">Add to Cart</button>
+<button class="buybtn" onclick="playDemo()">Play Demo</button>
+</div>
+
+<div class="wishlist" onclick="wishlist()">
+Add to Wishlist
+</div>
+
+<div class="players" id="players">
+14253 players online
+</div>
+
+</div>
+</div>
+
+<div class="desc">
+<h2>About This Game</h2>
+<p>
+Return to Aperture Science in Portal 3. Years after the events of Portal 2,
+hidden testing chambers begin activating across the abandoned facility.
+</p>
+<p>
+Using the next generation portal device, players must solve complex
+physics puzzles and uncover the truth behind Aperture’s newest experiment.
+</p>
+</div>
+
+<div class="achievements">
+<h2>Achievements</h2>
+<div class="achievement">🏆 First Test Chamber</div>
+<div class="achievement">🏆 Master of Portals</div>
+<div class="achievement">🏆 Escape Aperture</div>
+<div class="achievement">🏆 Co-op Genius</div>
+</div>
+
+<div class="news">
+<h2>Latest News</h2>
+<div class="newspost">
+<b>Portal 3 Announced</b><br>
+Aperture Science testing facilities are reopening.
+</div>
+<div class="newspost">
+<b>New Portal Mechanics</b><br>
+Valve introduces dynamic portals and gravity puzzles.
+</div>
+</div>
+
+<div class="recommended">
+<h2>More Like This</h2>
+<div class="recgrid">
+<div class="rec">
+<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/400/capsule_616x353.jpg">
+Portal
+</div>
+<div class="rec">
+<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/620/capsule_616x353.jpg">
+Portal 2
+</div>
+<div class="rec">
+<img src="https://cdn.cloudflare.steamstatic.com/steam/apps/220/capsule_616x353.jpg">
+Half-Life 2
+</div>
+</div>
+</div>
+
+<div class="userreviews">
+<h2>User Reviews</h2>
+<div class="reviewbox">
+<div class="username">TestSubject42</div>
+Amazing puzzles and the return of GLaDOS. Worth the wait.
+</div>
+<div class="reviewbox">
+<div class="username">ApertureEmployee</div>
+The cooperative chambers are the best part of the game.
+</div>
+</div>
+
+<div class="specs">
+<h2>System Requirements</h2>
+Minimum:<br>
+OS: Windows 10<br>
+Processor: Intel i5<br>
+Memory: 8 GB RAM<br>
+Graphics: GTX 970<br>
+Storage: 30 GB available space
+</div>
+
+</div>
+
+<div class="footer">
+© Valve Corporation — Fan Store Page Concept
+</div>
+
+<div class="popup">
+✔ Your friend WheatleyFan just wishlisted Portal 3
+</div>
+
+<!-- PORTAL DEMO OVERLAY -->
+<div id="portalGame">
+<div class="backbtn" onclick="exitDemo()">← Back to Steam Page</div>
+<h2 style="color:white;margin-top:20px;">Aperture Science Test Chamber</h2>
+<p style="color:#aaa">Move with WASD • Click to place portals</p>
+<canvas id="game" width="900" height="500"></canvas>
+</div>
+
+</body>
+</html>
